@@ -146,12 +146,11 @@ namespace SchoolManagement
 					case "14":
 						LastBook();
 						break;
-
-
-
-
                     case "15":
 						AddStudent();
+						break;
+					case "16":
+						UpdateStudent();
 						break;
 					case "18":
 						AddAdress();
@@ -160,8 +159,6 @@ namespace SchoolManagement
 					case "20":
 						AddNotes();
 						break;
-
-
 
 				}
 			}
@@ -281,12 +278,43 @@ namespace SchoolManagement
 			int number = Tools.TakeNumber("Student's Number: ");
 			string lastBook = MySchool.Students.Where(a => a.no == number).FirstOrDefault().Books.Last();
 			Console.WriteLine(lastBook);
-
-
-
+			Console.WriteLine();
 		}
+		static void UpdateStudent()
+		{
+            Console.WriteLine("16 - Update Student---------------------------------------------------------- -");
+            bool a = true;
 
+			while (a)
+			{
+                int number = Tools.TakeNumber("Student's Number: ");
+			
+				Student o = MySchool.Students.Where(a => a.no == number).FirstOrDefault();
 
+                if (o != null && o.no == number) 
+                {
+                    string name = Tools.TakeString("Name: ");
+                    string surname = Tools.TakeString("Surname: ");
+                    DateTime birthDay = Tools.TakeBirthday("Student's Birth Day: ");
+                    string gender = Tools.TakeGender("Gender of Student: ");
+                    string branch = Tools.TakeBranch("Branch of Student: ");
+
+                    o.no = number;
+                    o.name = name;
+                    o.surname = surname;
+                    o.date = birthDay;
+                    o.gender = gender;
+                    o.branch = branch;
+                    Console.WriteLine("Student was updated.");
+                    a = false;
+                }
+                else if (o == null)
+                {
+                 
+                    Console.WriteLine("There is no number with this number. Please, control the number and try again...");
+                }
+            }
+        }
 
 		static void UnSucc3()
 		{
