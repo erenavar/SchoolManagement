@@ -152,8 +152,16 @@ namespace SchoolManagement
 					case "16":
 						UpdateStudent();
 						break;
+					case "17":
+						DeleteStudent();
+						break;
+			
 					case "18":
 						AddAdress();
+						break;
+
+					case "19":
+						AddBookReadenByStudent();
 						break;
 
 					case "20":
@@ -315,7 +323,6 @@ namespace SchoolManagement
                 }
             }
         }
-
 		static void UnSucc3()
 		{
             Console.WriteLine("9-Most Unsuccesfull 3 Students -----------------------------------");
@@ -405,6 +412,33 @@ namespace SchoolManagement
 		
 			}
         }
+		static void DeleteStudent()
+		{
+			Console.WriteLine("17 - Remove Student----------------------------------------------------------------");
+			int number = Tools.TakeNumber("Number of Student");
+			Student std = MySchool.Students.Where(a => a.no == number).FirstOrDefault();
+			if(std == null || std.no != number)
+			{
+				Console.WriteLine("There is no student with this number.Please try again...");
+			} else
+			{
+				Console.WriteLine();
+				Console.WriteLine("Student's Name & Surname: " + std.name + " " + std.surname);
+				Console.WriteLine("Branch of Student: " + std.branch);
+				Console.WriteLine();
+				Console.Write("Are You Sure Do You Want to Remove Student (Y/N): ");
+				string answer = Console.ReadLine();
+
+				if(answer.ToUpper() == "Y")
+				{
+					MySchool.Students.Remove(std);
+					Console.WriteLine("Student was succesfully removed.");
+				} else
+				{
+					return;
+				}
+			}
+		}
 		static void AddAdress()
 		{
 
@@ -432,6 +466,28 @@ namespace SchoolManagement
 
             Console.WriteLine("Adress was added/updated");
 		}
+		static void AddBookReadenByStudent()
+		{
+			Console.WriteLine("19 - Add Book Readen by Student------------------------------------");
+			int number = Tools.TakeNumber("Student's Number: ");
+			Console.WriteLine();
+			Student std = MySchool.Students.Where(a => a.no == number).FirstOrDefault();
+
+			if(std.no == number)
+			{ 
+				Console.WriteLine("Student's Name & Surname: " + std.name + " " + std.surname);
+				Console.WriteLine("Branch of Student: " + std.branch);
+				Console.WriteLine();
+				Console.WriteLine("What Will the Name of Adding Book: ");
+				string bookName = Console.ReadLine();
+				std.Books.Add(bookName);
+			} else if (std.no != number || number == null)
+			{
+				Console.WriteLine("Something is wrong. Please try again...");
+			}
+
+
+        }
 		static void BooksOfTheStudent()
 		{
 			while (true)
