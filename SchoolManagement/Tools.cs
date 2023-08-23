@@ -266,6 +266,34 @@ namespace SchoolManagement
 
             return 1;
         }
+
+        public static string TakeSelection()
+        {
+            bool a = true;
+            string selection = "";
+            while (a)
+            {
+                Console.Write("Your Selection: ");
+                selection = Console.ReadLine();
+
+                try
+                {
+                    if (Convert.ToInt32(selection) < 21 && Convert.ToInt32(selection) > 0 || selection.ToLower() == "exit")
+                    {
+                        selection = selection is string ? selection : Convert.ToString(selection);
+                        a = false;
+                    }
+                 
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("There is something wrong about your selection.Please control it and try again...");
+
+                }
+            }
+            
+          return selection;
+        }
     }
 }
 

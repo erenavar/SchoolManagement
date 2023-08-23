@@ -12,12 +12,8 @@ namespace SchoolManagement
 		public static void Operate()
 		{
 			FakeData();
-
-			//Menu();
-		
-			App();
-		//	AddAdress();
-		
+			Menu();
+			App();		
 		}
 
 
@@ -41,8 +37,10 @@ namespace SchoolManagement
 			Console.WriteLine("14 - Show the Last Book the Student Read");
 			Console.WriteLine("15 - Add Student");
 			Console.WriteLine("16 - Update Student");
-			Console.WriteLine("17 - Enter Student's Adress");
-			Console.WriteLine("18 - Enter Student's Note");
+			Console.WriteLine("17 - Delete Student");
+			Console.WriteLine("18 - Enter Student's Adress");
+			Console.WriteLine("19 - Readen Books by Student");
+			Console.WriteLine("20 - Enter Student's Note");
 			Console.WriteLine();
 			Console.WriteLine("For Exit write 'Exit' and Press Enter.");
 		}
@@ -91,8 +89,7 @@ namespace SchoolManagement
 		{
 			while (true)
 			{
-				Console.Write("Your Selection: ");
-				string selection = Console.ReadLine();
+				string selection = Tools.TakeSelection();
 				switch (selection)
 				{
 					case "1":
@@ -168,6 +165,9 @@ namespace SchoolManagement
 						AddNotes();
 						break;
 
+					case "Exit":
+						Environment.Exit(1);
+						break;
 				}
 			}
 		}
@@ -478,15 +478,14 @@ namespace SchoolManagement
 				Console.WriteLine("Student's Name & Surname: " + std.name + " " + std.surname);
 				Console.WriteLine("Branch of Student: " + std.branch);
 				Console.WriteLine();
-				Console.WriteLine("What Will the Name of Adding Book: ");
+				Console.Write("What Will the Name of Adding Book: ");
 				string bookName = Console.ReadLine();
 				std.Books.Add(bookName);
+				Console.WriteLine("Book was succesfully added.");
 			} else if (std.no != number || number == null)
 			{
 				Console.WriteLine("Something is wrong. Please try again...");
 			}
-
-
         }
 		static void BooksOfTheStudent()
 		{
